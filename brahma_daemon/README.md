@@ -1,29 +1,15 @@
-# BrahmaDaemon
+BRAHMA-DAEMON 守护进程模板
+======================
 
-TODO: Write a gem description
+## 启动
+    Brahma::Daemon.new(PID_NAME, PID_PATH).start do
+        #也可以用.run(自带loop)
+    end
 
-## Installation
+## 停止
+    Brahma::Daemon.new(PID_NAME, PID_PATH).stop
 
-Add this line to your application's Gemfile:
+## 状态
+    Brahma::Daemon.new(PID_NAME, PID_PATH).start?
+    Brahma::Daemon.new(PID_NAME, PID_PATH).stop?
 
-    gem 'brahma_daemon'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install brahma_daemon
-
-## Usage
-
-TODO: Write usage instructions here
-
-## Contributing
-
-1. Fork it ( http://github.com/<my-github-username>/brahma_daemon/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
