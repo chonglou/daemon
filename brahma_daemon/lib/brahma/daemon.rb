@@ -24,17 +24,11 @@ module Brahma
         f.write pid
       end
       $0 = "brahma-#{@name}"
-      yield
-    end
-
-    def run
-      start do
-        loop do
-          if stop?
-            break
-          end
-          yield
+      loop do
+        if stop?
+          break
         end
+        yield
       end
     end
 
