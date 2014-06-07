@@ -13,6 +13,8 @@ module Brahma
     end
 
     def start
+      return unless block_given?
+
       if start?
         @logger.error "进程[#{@name}]已存在"
         return
@@ -56,7 +58,7 @@ module Brahma
         @logger.error "进程[#{@name}]尚未启动"
         return
       end
-      yield
+      yield if block_given?
       @logger.info "停止[#{@name}]"
       FileUtils.touch @stop
     end
