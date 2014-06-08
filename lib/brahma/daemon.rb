@@ -7,6 +7,9 @@ module Brahma
 
     def initialize(name, home)
       @name = name
+      unless Dir.exist?(home)
+        FileUtils.mkdir_p home
+      end
       @pid = File.expand_path "#{home}/#{@name}.pid"
       @stop = File.expand_path "#{home}/#{@name}.stop"
       @logger = ::Syslog::Logger.new "brahma-#{name}"
