@@ -34,7 +34,7 @@ module Brahma
 
     def kill
       if start?
-        `kill -TERM #{@pid}`
+        `kill -TERM $(cat #{@pid})`
       else
         @logger.error "进程[#{@name}]尚未启动"
       end
