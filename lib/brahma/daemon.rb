@@ -15,7 +15,7 @@ module Brahma
       @logger = ::Syslog::Logger.new "brahma-#{name}"
     end
 
-    def start
+    def run
       return unless block_given?
 
       if start?
@@ -29,11 +29,25 @@ module Brahma
         f.write pid
       end
       $0 = "brahma-#{@name}"
-      loop do
-        if stop?
-          break
+      yield
+    end
+
+    def kill
+      if start?
+        `kill -TERM #{@pid}`
+      else
+        @logger.error "进程[#{@name}]尚未启动"
+      end
+    end
+
+    def start
+      run do
+        loop do
+          if stop?
+            break
+          end
+          yield
         end
-        yield
       end
     end
 
